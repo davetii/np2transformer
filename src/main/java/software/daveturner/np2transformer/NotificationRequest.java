@@ -5,13 +5,13 @@ import java.util.*;
 public class NotificationRequest {
 
     private final String eventCode;
-    private String templateCode;
-    private String languageCode;
-    private String notificationTypeCode;
-    private String notificationChannel;
-    private String notificationDeviceId;
-    private String customerIdType;
-    private String customerId;
+    private final String templateCode;
+    private final String languageCode;
+    private final String notificationTypeCode;
+    private final String notificationChannel;
+    private final String notificationDeviceId;
+    private final String customerIdType;
+    private final String customerId;
 
     public String getLanguageCode() {
         return languageCode;
