@@ -1,0 +1,124 @@
+<Document>
+	<AddressDetails>
+		<Line1>38930 WINKLER ST</Line1>
+		<City>HARRISON TOWNSHIP</City>
+		<State>MI</State>
+		<Country>US</Country>
+		<Postcode>48045</Postcode>
+	</AddressDetails>
+	<CompanyAddress>
+		<Line1>OnStar Customer Care</Line1>
+		<Line2>P.O. Box 1027</Line2>
+		<Line3>Warren, MI 48090-1027</Line3>
+	</CompanyAddress>
+	<ContactDetails>
+		<OfficialName>Diana Turner</OfficialName>
+	</ContactDetails>
+	<Contract>onstar</Contract>
+	<AccountNumber>155040670</AccountNumber>
+	<PrintedDate>2022-11-17</PrintedDate>
+	<Language>1</Language>
+	<PaymentDetail>
+		<ReceivedDate>2022-11-17</ReceivedDate>
+		<BillingReceiptNr>P-121400771</BillingReceiptNr>
+		<PaymentDisplayStatus>Processed</PaymentDisplayStatus>
+		<PaymentType>
+			<TransactionType>Visa-8653</TransactionType>
+			<PaymentTypeName>Credit Card</PaymentTypeName>
+			<CreditCardNumberMasked>************8653</CreditCardNumberMasked>
+			<CreditCardType>Visa</CreditCardType>
+			<ExpiryDate>1126</ExpiryDate>
+		</PaymentType>
+		<CurrencySymbol>USD</CurrencySymbol>
+		<CurrencyAmount>
+			<RawAmount>39.99</RawAmount>
+			<PreferredAmount>39.99</PreferredAmount>
+		</CurrencyAmount>
+		<ReferenceTransactionType>Invoice</ReferenceTransactionType>
+		<ReferenceTransactionNumber>OSINV93998862</ReferenceTransactionNumber>
+		<ReferenceTransactionDate>2022-11-17</ReferenceTransactionDate>
+	</PaymentDetail>
+	<OrderLineItems>
+		<OrderLineItem>
+			<TransactionDate>2022-11-17</TransactionDate>
+			<VIN>1G1ZD5ST3NF204255</VIN>
+			<OrderNumber>346959934</OrderNumber>
+			<FromDate>2022-10-28</FromDate>
+			<ToDate>2022-11-27</ToDate>
+			<PaymentItems>
+				<PaymentItem>
+					<Description>Premium Monthly Recurring</Description>
+					<Amount>
+						<RawAmount>34.99</RawAmount>
+						<PreferredAmount>34.99</PreferredAmount>
+					</Amount>
+				</PaymentItem>
+				<PaymentItem>
+					<Description>Premium Incentive Discount</Description>
+					<Amount>
+						<RawAmount>-34.99</RawAmount>
+						<PreferredAmount>-34.99</PreferredAmount>
+					</Amount>
+				</PaymentItem>
+				<PaymentItem>
+					<Description>Net Amount</Description>
+					<Amount>
+						<RawAmount>0</RawAmount>
+						<PreferredAmount>0</PreferredAmount>
+					</Amount>
+				</PaymentItem>
+				<PaymentItem>
+					<Description>Total Tax</Description>
+					<Amount>
+						<RawAmount>0</RawAmount>
+						<PreferredAmount>0</PreferredAmount>
+					</Amount>
+				</PaymentItem>
+				<PaymentItem>
+					<Description>Total</Description>
+					<Amount>
+						<RawAmount>0</RawAmount>
+						<PreferredAmount>0</PreferredAmount>
+					</Amount>
+				</PaymentItem>
+			</PaymentItems>
+		</OrderLineItem>
+		<OrderLineItem>
+			<TransactionDate>2022-11-17</TransactionDate>
+			<VIN>3GNAXKEV3LS735012</VIN>
+			<OrderNumber>307668010</OrderNumber>
+			<FromDate>2022-11-02</FromDate>
+			<ToDate>2022-12-01</ToDate>
+			<PaymentItems>
+				<PaymentItem>
+					<Description>Essentials Monthly Recurring</Description>
+					<Amount>
+						<RawAmount>39.99</RawAmount>
+						<PreferredAmount>39.99</PreferredAmount>
+					</Amount>
+				</PaymentItem>
+				<PaymentItem>
+					<Description>Net Amount</Description>
+					<Amount>
+						<RawAmount>39.99</RawAmount>
+						<PreferredAmount>39.99</PreferredAmount>
+					</Amount>
+				</PaymentItem>
+				<PaymentItem>
+					<Description>Total Tax</Description>
+					<Amount>
+						<RawAmount>0</RawAmount>
+						<PreferredAmount>0</PreferredAmount>
+					</Amount>
+				</PaymentItem>
+				<PaymentItem>
+					<Description>Total</Description>
+					<Amount>
+						<RawAmount>39.99</RawAmount>
+						<PreferredAmount>39.99</PreferredAmount>
+					</Amount>
+				</PaymentItem>
+			</PaymentItems>
+		</OrderLineItem>
+	</OrderLineItems>
+</Document>

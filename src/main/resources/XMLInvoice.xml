@@ -1,0 +1,102 @@
+<XMLInvoice>
+	<Document>
+		<ContactDetails>
+			<GivenName>Diana Nicole Turner</GivenName>
+			<Language>1</Language>
+		</ContactDetails>
+		<AddressDetails>
+			<Line1>38930 WINKLER ST</Line1>
+			<City>HARRISON TOWNSHIP, US 48045</City>
+			<Country>US</Country>
+		</AddressDetails>
+		<CompanyAddress>
+			<Line1>OnStar Customer Care</Line1>
+			<Line2>P.O. Box 1027</Line2>
+			<Line3>Warren, MI 48090-1027</Line3>
+		</CompanyAddress>
+		<CustomerDetails>
+			<Contract>1</Contract>
+		</CustomerDetails>
+		<Invoice>
+			<InvoiceInfo>
+				<AccountNumber>155040670</AccountNumber>
+				<IssueDate>2023-01-16</IssueDate>
+				<ReferenceNumber>OSINV102099372</ReferenceNumber>
+				<PreviousBalance>
+					<RawAmount CurrencyType="USD">0</RawAmount>
+				</PreviousBalance>
+				<NetForBaseOnsServices>
+					<RawAmount CurrencyType="USD">34.99</RawAmount>
+				</NetForBaseOnsServices>
+				<NetForSupplOnsServices>
+					<RawAmount CurrencyType="USD">0</RawAmount>
+				</NetForSupplOnsServices>
+				<TotalPayments>
+					<RawAmount CurrencyType="USD">34.99</RawAmount>
+				</TotalPayments>
+				<TotalAdjCanVoids>
+					<RawAmount CurrencyType="USD">0</RawAmount>
+				</TotalAdjCanVoids>
+				<AccountAmountDue>
+					<RawAmount CurrencyType="USD">34.99</RawAmount>
+				</AccountAmountDue>
+			</InvoiceInfo>
+			<MRCDetails>
+				<VINDetails>
+					<VIN>1G1ZD5ST3NF204255</VIN>
+					<OrderDetail>
+						<OrderId>346959934</OrderId>
+						<Charges>
+							<Detail>
+								<TransactionDate>2023-01-16</TransactionDate>
+								<InvoiceTxt>Premium Monthly Recurring</InvoiceTxt>
+								<FromDate>2022-12-28</FromDate>
+								<ToDate>2023-01-27</ToDate>
+								<Amount>
+									<RawAmount CurrencyType="USD">34.99</RawAmount>
+								</Amount>
+							</Detail>
+							<Detail>
+								<InvoiceTxt>Net Price</InvoiceTxt>
+								<Amount>
+									<RawAmount CurrencyType="USD">34.99</RawAmount>
+								</Amount>
+							</Detail>
+						</Charges>
+						<Taxes/>
+						<TotalTax>
+							<Amount>
+								<RawAmount CurrencyType="USD">0</RawAmount>
+							</Amount>
+						</TotalTax>
+						<OrderTotal>
+							<Amount>
+								<RawAmount CurrencyType="USD">34.99</RawAmount>
+							</Amount>
+						</OrderTotal>
+					</OrderDetail>
+					<VINTotal>
+						<Amount>
+							<RawAmount CurrencyType="USD">34.99</RawAmount>
+						</Amount>
+					</VINTotal>
+				</VINDetails>
+				<MRCTotal>
+					<RawAmount CurrencyType="USD">34.99</RawAmount>
+				</MRCTotal>
+			</MRCDetails>
+			<AdjustmentList/>
+			<PaymentList>
+				<PaymentDetail>
+					<TransactionDate>2023-01-17</TransactionDate>
+					<TransactionType>Visa - 1633</TransactionType>
+					<BillingReceiptNr>Payment</BillingReceiptNr>
+					<ReferenceNum>P-132943694</ReferenceNum>
+					<CurrencyAmount>
+						<RawAmount CurrencyType="USD">34.99</RawAmount>
+					</CurrencyAmount>
+				</PaymentDetail>
+			</PaymentList>
+		</Invoice>
+	</Document>
+</XMLInvoice>
