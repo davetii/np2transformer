@@ -25,10 +25,14 @@ public class App {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    NotificationRequest request = PaymentReceiptNotificationRequest.init("EN-US", "bob@nowhere.com", "profileid", "12345-wedf");
+    NotificationRequest request = new PaymentReceiptNotificationRequest("EN-US", "bob@nowhere.com", "profileid", "12345-wedf");
     PaymentReceiptNotificationMapper mapper = new PaymentReceiptNotificationMapper();
     mapper.mapXmlToNotificationRequest(request, xmlString);
+
+    System.out.println("show me the Payment receipt notificaiton object");
     System.out.println(request.toJson());
+
+
 
   }
 

@@ -4,7 +4,7 @@ import java.util.*;
 
 public class NotificationRequest {
 
-    private String eventCode;
+    private final String eventCode;
     private String templateCode;
     private String languageCode;
     private String notificationTypeCode;
@@ -16,74 +16,38 @@ public class NotificationRequest {
     public String getLanguageCode() {
         return languageCode;
     }
-
-    public void setLanguageCode(String languageCode) {
-        this.languageCode = languageCode;
-    }
-
     public String getEventCode() {
         return eventCode;
-    }
-
-    public void setEventCode(String eventCode) {
-        this.eventCode = eventCode;
     }
 
     public String getTemplateCode() {
         return templateCode;
     }
 
-    public void setTemplateCode(String templateCode) {
-        this.templateCode = templateCode;
-    }
-
     public String getNotificationTypeCode() {
         return notificationTypeCode;
-    }
-
-    public void setNotificationTypeCode(String notificationTypeCode) {
-        this.notificationTypeCode = notificationTypeCode;
     }
 
     public String getNotificationChannel() {
         return notificationChannel;
     }
 
-    public void setNotificationChannel(String notificationChannel) {
-        this.notificationChannel = notificationChannel;
-    }
-
     public String getNotificationDeviceId() {
         return notificationDeviceId;
     }
-
-    public void setNotificationDeviceId(String notificationDeviceId) {
-        this.notificationDeviceId = notificationDeviceId;
-    }
-
     public String getCustomerIdType() {
         return customerIdType;
     }
-
-    public void setCustomerIdType(String customerIdType) {
-        this.customerIdType = customerIdType;
-    }
-
     public String getCustomerId() {
         return customerId;
     }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
     private Map<String, String> keyValues = new HashMap<>();
 
     public void addKeyValue(Map<String, String> map) {
         keyValues.putAll(map);
     }
 
-    public static NotificationRequest init(
+    public NotificationRequest(
             String newEventCode,
             String newTemplateCode,
             String newNotificationTypeCode,
@@ -93,18 +57,15 @@ public class NotificationRequest {
             String newCustomerIdType,
             String newCustomerId
     ) {
-        NotificationRequest request = new NotificationRequest();
-        request.setEventCode(newEventCode);
-        request.setTemplateCode(newTemplateCode);
-        request.setNotificationTypeCode(newNotificationTypeCode);
-        request.setLanguageCode(newLanguageCode);
-        request.setNotificationChannel(newNotificationChannel);
-        request.setNotificationDeviceId(newNotificationDeviceId);
-        request.setCustomerIdType(newCustomerIdType);
-        request.setCustomerId(newCustomerId);
-        return request;
+        this.eventCode = newEventCode;
+        this.templateCode = newTemplateCode;
+        this.notificationTypeCode = newNotificationTypeCode;
+        this.languageCode = newLanguageCode;
+        this.notificationChannel = newNotificationChannel;
+        this.notificationDeviceId = newNotificationDeviceId;
+        this.customerIdType = newCustomerIdType;
+        this.customerId = newCustomerId;
     }
-
 
     public String toJson() {
         String s = "{\n";
@@ -126,8 +87,7 @@ public class NotificationRequest {
                 s += ",\n";
             }
         }
-        s += "\n]\n";
-        s += "}\n";
+        s += "\n]}";
         return s;
 
     }
