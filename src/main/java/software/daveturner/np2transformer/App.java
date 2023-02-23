@@ -25,12 +25,25 @@ public class App {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    NotificationRequest request = new PaymentReceiptNotificationRequest("EN-US", "bob@nowhere.com", "profileid", "12345-wedf");
-    PaymentReceiptNotificationMapper mapper = new PaymentReceiptNotificationMapper();
-    mapper.mapXmlToNotificationRequest(request, xmlString);
+    NotificationRequest payRequest = new PaymentReceiptNotificationRequest(
+            "EN-US",
+            "bob@nowhere.com",
+            "profileid",
+            "12345-wedf",
+            xmlString
+    );
 
-    System.out.println("show me the Payment receipt notificaiton object");
-    System.out.println(request.toJson());
+    System.out.println("show me the Payment receipt notification object");
+    System.out.println(payRequest.toJson());
+
+    NotificationRequest dataUsageRequest = new DataUsageExpireNotificationRequest(
+            "EN-US",
+            "bob@nowhere.com",
+            "profileid",
+            "12345-wedf"
+    );
+
+
 
 
 

@@ -41,10 +41,14 @@ public class NotificationRequest {
     public String getCustomerId() {
         return customerId;
     }
-    private Map<String, String> keyValues = new HashMap<>();
+    protected Map<String, String> keyValues = new HashMap<>();
 
     public void addKeyValue(Map<String, String> map) {
         keyValues.putAll(map);
+    }
+
+    public void addKeyValue(String k, String v) {
+        keyValues.put(k, v);
     }
 
     public NotificationRequest(
