@@ -14,12 +14,14 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class PaymentReceiptXMLMapper {
 
     private final String addressXML;
     private final String companyXML;
+    private final String paymentDetailXML;
 
     Document inputXmlDoc;
     public PaymentReceiptXMLMapper(String inputXML) {
@@ -40,8 +42,33 @@ public class PaymentReceiptXMLMapper {
         }
 
         inputXmlDoc.getDocumentElement().normalize();
-        addressXML = buildAddressXML();
-        companyXML = buildCompanyXML();
+        this.addressXML = buildAddressXML();
+        this.companyXML = buildCompanyXML();
+        this.paymentDetailXML = buildPaymentDetailXML();
+    }
+
+    private String buildPaymentDetailXML() {
+        Document doc = initDoc();
+        Element e = doc.createElement("PaymentDetail");
+        doc.appendChild(e);
+        e.setAttributeNode(createAttribute(inputXmlDoc, doc, "BillingReceiptNr"));
+        e.setAttributeNode(createAttribute(inputXmlDoc, doc, "CurrencySymbol"));
+        e.setAttributeNode(createAttribute(inputXmlDoc, doc, "PaymentDisplayStatus"));
+        e.setAttributeNode(createAttribute(inputXmlDoc, doc, "ReceivedDate"));
+        e.setAttributeNode(createAttribute(inputXmlDoc, doc, "ReferenceTransactionNumber"));
+        e.setAttributeNode(createAttribute(inputXmlDoc, doc, "ReferenceTransactionType"));
+        e.setAttributeNode(createAttribute(inputXmlDoc, doc, "TransactionDate"));
+        e.setAttributeNode(createAttribute(inputXmlDoc, doc, "TransactionType"));
+
+        NodeList list = inputXmlDoc.getElementsByTagName("CurrencyAmount").item(0).getChildNodes();
+        for (int i=0; i< list.getLength(); i++) {
+            Node n = list.item(i);
+            if(n.getNodeType() == Node.ELEMENT_NODE && n.getNodeName().toUpperCase(Locale.ENGLISH).equals("RAWAMOUNT")) {
+                e.setAttributeNode(createAttribute(doc, "CurrencyAmount", n.getTextContent()));
+            }
+        }
+
+        return docToString(doc);
     }
 
     private String buildCompanyXML() {
@@ -50,9 +77,9 @@ public class PaymentReceiptXMLMapper {
         Document doc = initDoc();
         Element e = doc.createElement("Company");
         doc.appendChild(e);
-        e.setAttributeNode(createAttribute(doc, map, "Line1", "Line1"));
-        e.setAttributeNode(createAttribute(doc, map, "Line2", "Line2"));
-        e.setAttributeNode(createAttribute(doc, map, "Line3", "Line3"));
+        e.setAttributeNode(createAttribute(doc, "Line1", map));
+        e.setAttributeNode(createAttribute(doc, "Line2", map));
+        e.setAttributeNode(createAttribute(doc, "Line3", map));
         return docToString(doc);
     }
 
@@ -61,19 +88,28 @@ public class PaymentReceiptXMLMapper {
         Document doc = initDoc();
         Element element = doc.createElement("Address");
         doc.appendChild(element);
-        element.setAttributeNode(createAttribute(doc, map, "City", "City"));
-        element.setAttributeNode(createAttribute(doc, map, "Country", "Country"));
-        element.setAttributeNode(createAttribute(doc, map, "State", "State"));
-        element.setAttributeNode(createAttribute(doc, map, "Postcode", "Postcode"));
-        element.setAttributeNode(createAttribute(doc, map, "Line1", "Line1"));
-        element.setAttributeNode(createAttribute(doc, map, "Line2", "Line2"));
-        element.setAttributeNode(createAttribute(doc, map, "Line3", "Line3"));
+        element.setAttributeNode(createAttribute(doc, "City", map));
+        element.setAttributeNode(createAttribute(doc, "Country", map));
+        element.setAttributeNode(createAttribute(doc, "State", map));
+        element.setAttributeNode(createAttribute(doc, "Postcode", map));
+        element.setAttributeNode(createAttribute(doc, "Line1", map));
+        element.setAttributeNode(createAttribute(doc, "Line2", map));
+        element.setAttributeNode(createAttribute(doc, "Line3", map));
         return docToString(doc);
     }
 
-    private Attr createAttribute(Document doc, Map<String, String> map, String sourceKey, String newAttribName) {
-        Attr attr = doc.createAttribute(sourceKey);
-        attr.setValue(map.get(newAttribName));
+    private Attr createAttribute(Document source, Document target, String key) {
+        Node n = source.getElementsByTagName(key).item(0);
+        return createAttribute(target, key, n.getTextContent());
+    }
+
+    private Attr createAttribute(Document doc, String key, Map<String, String> map) {
+        return createAttribute(doc, key, map.get(key));
+    }
+
+    private Attr createAttribute(Document doc, String key, String value) {
+        Attr attr = doc.createAttribute(key);
+        attr.setValue(value);
         return attr;
     }
 
@@ -126,4 +162,9 @@ public class PaymentReceiptXMLMapper {
     public String getCompanyXML() {
         return this.companyXML;
     }
+
+    public String getPaymenntDetailXML() {
+        return this.paymentDetailXML;
+    }
 }
+

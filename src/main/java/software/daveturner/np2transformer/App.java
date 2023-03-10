@@ -16,6 +16,9 @@ public class App {
     System.out.println(mapper.getAddressXML());
     System.out.println("show me the Company receipt address object");
     System.out.println(mapper.getCompanyXML());
+    System.out.println("show me the Payment Detail object");
+    System.out.println(mapper.getPaymenntDetailXML());
+
 
   }
 
