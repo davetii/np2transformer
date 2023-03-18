@@ -150,7 +150,7 @@ public class PaymentReceiptXMLMapper {
         NodeList list = sourceDoc.getElementsByTagName("CurrencyAmount").item(0).getChildNodes();
         for (int i=0; i< list.getLength(); i++) {
             Node n = list.item(i);
-            if(n.getNodeType() == Node.ELEMENT_NODE && n.getNodeName().toUpperCase(Locale.ENGLISH).equals("RAWAMOUNT")) {
+            if(isElementNamed(n, "RawAmount")) {
                 e.setAttributeNode(createAttribute(targetDoc, "CurrencyAmount", n.getTextContent()));
                 return;
             }

@@ -22,8 +22,8 @@ public class App {
   }
 
   private static void invoiceInvoiceReceipt(String xml) {
-    System.out.println("here is source");
-    System.out.println(xml);
+    //System.out.println("here is source");
+    //System.out.println(xml);
 
   }
 
