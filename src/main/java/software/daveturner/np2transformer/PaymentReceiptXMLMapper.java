@@ -23,10 +23,11 @@ public class PaymentReceiptXMLMapper {
     private final String companyXML;
     private final String paymentDetailXML;
 
-    Document inputXmlDoc;
+    private final String ordersXml;
+
     public PaymentReceiptXMLMapper(String inputXML) {
         DocumentBuilder builder;
-
+        Document sourceDoc;
         try {
             builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         } catch (ParserConfigurationException e) {
@@ -34,47 +35,131 @@ public class PaymentReceiptXMLMapper {
         }
         InputSource is = new InputSource(new StringReader(inputXML));
         try {
-            inputXmlDoc = builder.parse(is);
+            sourceDoc = builder.parse(is);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (SAXException e) {
             throw new RuntimeException(e);
         }
 
-        inputXmlDoc.getDocumentElement().normalize();
-        this.addressXML = buildAddressXML();
-        this.companyXML = buildCompanyXML();
-        this.paymentDetailXML = buildPaymentDetailXML();
+        sourceDoc.getDocumentElement().normalize();
+        this.addressXML = buildAddressXML(sourceDoc);
+        this.companyXML = buildCompanyXML(sourceDoc);
+        this.paymentDetailXML = buildPaymentDetailXML(sourceDoc);
+        this.ordersXml = buildOrdersXML(sourceDoc);
     }
 
-    private String buildPaymentDetailXML() {
-        Document doc = initDoc();
-        Element e = doc.createElement("PaymentDetail");
-        doc.appendChild(e);
-        e.setAttributeNode(createAttribute(inputXmlDoc, doc, "BillingReceiptNr"));
-        e.setAttributeNode(createAttribute(inputXmlDoc, doc, "CurrencySymbol"));
-        e.setAttributeNode(createAttribute(inputXmlDoc, doc, "PaymentDisplayStatus"));
-        e.setAttributeNode(createAttribute(inputXmlDoc, doc, "ReceivedDate"));
-        e.setAttributeNode(createAttribute(inputXmlDoc, doc, "ReferenceTransactionNumber"));
-        e.setAttributeNode(createAttribute(inputXmlDoc, doc, "ReferenceTransactionType"));
-        e.setAttributeNode(createAttribute(inputXmlDoc, doc, "TransactionDate"));
-        e.setAttributeNode(createAttribute(inputXmlDoc, doc, "TransactionType"));
-
-        NodeList list = inputXmlDoc.getElementsByTagName("CurrencyAmount").item(0).getChildNodes();
+    private String buildOrdersXML(Document sourceDoc) {
+        Document newDoc = newDoc();
+        Element items = newDoc.createElement("OrderLineItems");
+        newDoc.appendChild(items);
+        NodeList list = sourceDoc.getElementsByTagName("OrderLineItems").item(0).getChildNodes();
         for (int i=0; i< list.getLength(); i++) {
             Node n = list.item(i);
-            if(n.getNodeType() == Node.ELEMENT_NODE && n.getNodeName().toUpperCase(Locale.ENGLISH).equals("RAWAMOUNT")) {
-                e.setAttributeNode(createAttribute(doc, "CurrencyAmount", n.getTextContent()));
+            if(n.getNodeType() == Node.ELEMENT_NODE) {
+                Element order = sourceOrderToTargetOrder(newDoc, n);
+                items.appendChild(order);
             }
         }
+        return docToString(newDoc);
 
+    }
+
+    private Element sourceOrderToTargetOrder(Document doc, Node n) {
+        Element order = doc.createElement("Order");
+        NodeList list = n.getChildNodes();
+        for (int i=0; i< list.getLength(); i++) {
+            Node child = list.item(i);
+            if(child.getNodeType() == Node.ELEMENT_NODE) {
+                maybeAddAttribute(order, child, "FromDate");
+                maybeAddAttribute(order, child, "ToDate");
+                maybeAddAttribute(order, child, "TransactionDate");
+                maybeAddAttribute(order, child, "VIN");
+                maybeAddAttribute(order, child, "OrderNumber");
+                if (child.getNodeName().equals("PaymentItems")) {
+                    NodeList items = child.getChildNodes();
+                    for (int x=0; x< items.getLength(); x++) {
+                        Node payItem = items.item(x);
+                        if(payItem != null && payItem.getNodeType() == Node.ELEMENT_NODE && payItem.getNodeName().equals("PaymentItem")) {
+                            order.appendChild(createPaymentItem(doc, payItem));
+                        }
+                    }
+
+                }
+            }
+        }
+        return order;
+    }
+
+    private Node createPaymentItem(Document doc, Node n) {
+        Element element = doc.createElement("Payment");
+        NodeList children = n.getChildNodes();
+        for (int i=0; i< children.getLength(); i++) {
+            Node child = children.item(i);
+
+            if (isElementNamed(child, "Description")) {
+                element.setAttribute("Description", child.getTextContent());
+            }
+
+            if (isElementNamed(child, "Amount")) {
+                NodeList subChildren = child.getChildNodes();
+                for (int amtCounter=0; amtCounter< children.getLength(); amtCounter++) {
+                    Node subChild = subChildren.item(amtCounter);
+
+                    if(isElementNamed(subChild, "RawAmount")) {
+                        element.setTextContent(subChild.getTextContent());
+                    }
+                }
+
+            }
+        }
+        return element;
+    }
+
+    private boolean isElementNamed(Node n, String s) {
+        return (n != null && n.getNodeType() == Node.ELEMENT_NODE && n.getNodeName().equals(s));
+    }
+
+    private void maybeAddAttribute(Element order, Node child, String s) {
+        if (child.getNodeName().equals(s)) {
+            maybeAddAttribute(order, s, child.getTextContent());
+        }
+    }
+
+    private void maybeAddAttribute(Element element, String key, String value) {
+        element.setAttribute( key, value );
+    }
+
+    private String buildPaymentDetailXML(Document sourceDoc) {
+        Document doc = newDoc();
+        Element e = doc.createElement("PaymentDetail");
+        doc.appendChild(e);
+        e.setAttributeNode(createAttribute(sourceDoc, doc, "BillingReceiptNr"));
+        e.setAttributeNode(createAttribute(sourceDoc, doc, "CurrencySymbol"));
+        e.setAttributeNode(createAttribute(sourceDoc, doc, "PaymentDisplayStatus"));
+        e.setAttributeNode(createAttribute(sourceDoc, doc, "ReceivedDate"));
+        e.setAttributeNode(createAttribute(sourceDoc, doc, "ReferenceTransactionNumber"));
+        e.setAttributeNode(createAttribute(sourceDoc, doc, "ReferenceTransactionType"));
+        e.setAttributeNode(createAttribute(sourceDoc, doc, "TransactionDate"));
+        e.setAttributeNode(createAttribute(sourceDoc, doc, "TransactionType"));
+        maybeSetCurrencyAmount(sourceDoc, doc, e);
         return docToString(doc);
     }
 
-    private String buildCompanyXML() {
-        Map<String, String> map = nodeToMap("CompanyAddress");
-        System.out.println(map.keySet());
-        Document doc = initDoc();
+    private void maybeSetCurrencyAmount(Document sourceDoc, Document targetDoc, Element e) {
+        NodeList list = sourceDoc.getElementsByTagName("CurrencyAmount").item(0).getChildNodes();
+        for (int i=0; i< list.getLength(); i++) {
+            Node n = list.item(i);
+            if(n.getNodeType() == Node.ELEMENT_NODE && n.getNodeName().toUpperCase(Locale.ENGLISH).equals("RAWAMOUNT")) {
+                e.setAttributeNode(createAttribute(targetDoc, "CurrencyAmount", n.getTextContent()));
+                return;
+            }
+        }
+    }
+
+    private String buildCompanyXML(Document sourceDoc) {
+        Map<String, String> map = nodeToMap(sourceDoc, "CompanyAddress");
+        Document doc = newDoc();
         Element e = doc.createElement("Company");
         doc.appendChild(e);
         e.setAttributeNode(createAttribute(doc, "Line1", map));
@@ -83,9 +168,9 @@ public class PaymentReceiptXMLMapper {
         return docToString(doc);
     }
 
-    private String buildAddressXML() {
-        Map<String, String> map = nodeToMap("AddressDetails");
-        Document doc = initDoc();
+    private String buildAddressXML(Document sourceDoc) {
+        Map<String, String> map = nodeToMap(sourceDoc, "AddressDetails");
+        Document doc = newDoc();
         Element element = doc.createElement("Address");
         doc.appendChild(element);
         element.setAttributeNode(createAttribute(doc, "City", map));
@@ -132,7 +217,7 @@ public class PaymentReceiptXMLMapper {
         return sw.toString();
     }
 
-    private Document initDoc() {
+    private Document newDoc() {
         DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder;
         try {
@@ -147,9 +232,9 @@ public class PaymentReceiptXMLMapper {
         return addressXML;
     }
 
-    private Map<String, String> nodeToMap(String nodeName) {
+    private Map<String, String> nodeToMap(Document sourceDoc, String nodeName) {
         Map<String, String> map = new HashMap<>();
-        NodeList list = inputXmlDoc.getElementsByTagName(nodeName).item(0).getChildNodes();
+        NodeList list = sourceDoc.getElementsByTagName(nodeName).item(0).getChildNodes();
         for (int i=0; i< list.getLength(); i++) {
             Node n = list.item(i);
             if(n.getNodeType() == Node.ELEMENT_NODE) {
@@ -165,6 +250,10 @@ public class PaymentReceiptXMLMapper {
 
     public String getPaymenntDetailXML() {
         return this.paymentDetailXML;
+    }
+
+    public String getOrdersXML() {
+        return this.ordersXml;
     }
 }
 
