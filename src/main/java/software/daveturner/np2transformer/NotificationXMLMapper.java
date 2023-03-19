@@ -69,6 +69,16 @@ public class NotificationXMLMapper {
         return docToString(doc);
     }
 
+    protected void maybeAddAttribute(Element order, Node child, String s) {
+        if (isElementNamed(child, s)) {
+            addAttribute(order, s, child.getTextContent());
+        }
+    }
+
+    protected void addAttribute(Element element, String key, String value) {
+        element.setAttribute( key, value );
+    }
+
     protected Attr createAttribute(Document target, String key) {
         Node n = sourceDoc.getElementsByTagName(key).item(0);
         return createAttribute(target, key, n.getTextContent());

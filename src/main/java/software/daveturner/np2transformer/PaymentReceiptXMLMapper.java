@@ -10,10 +10,28 @@ public class PaymentReceiptXMLMapper extends NotificationXMLMapper {
 
     private final String paymentDetailXML;
     private final String ordersXml;
+
+    private final String contactXML;
+
+
+
     public PaymentReceiptXMLMapper(String inputXML) {
         super(inputXML);
         this.paymentDetailXML = buildPaymentDetailXML();
         this.ordersXml = buildOrdersXML();
+        this.contactXML = buildContactXML();
+    }
+
+    private String buildContactXML() {
+        NodeList list = sourceDoc.getElementsByTagName("ContactDetails").item(0).getChildNodes();
+        Document newDoc = newDoc();
+        Element contact = newDoc.createElement("Contact");
+        newDoc.appendChild(contact);
+        for (int i=0; i< list.getLength(); i++) {
+            Node n = list.item(i);
+            maybeAddAttribute(contact, n, "OfficialName");
+        }
+        return docToString(newDoc);
     }
 
     private String buildOrdersXML() {
@@ -84,15 +102,6 @@ public class PaymentReceiptXMLMapper extends NotificationXMLMapper {
     }
 
 
-    private void maybeAddAttribute(Element order, Node child, String s) {
-        if (child.getNodeName().equals(s)) {
-            maybeAddAttribute(order, s, child.getTextContent());
-        }
-    }
-
-    private void maybeAddAttribute(Element element, String key, String value) {
-        element.setAttribute( key, value );
-    }
 
     private String buildPaymentDetailXML() {
         Document doc = newDoc();
@@ -127,6 +136,10 @@ public class PaymentReceiptXMLMapper extends NotificationXMLMapper {
 
     public String getOrdersXML() {
         return this.ordersXml;
+    }
+
+    public String getContactXML() {
+        return contactXML;
     }
 }
 

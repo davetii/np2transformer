@@ -24,6 +24,8 @@ public class App {
   private static void invoiceInvoiceReceipt(String xml) {
     System.out.println("Mappings for Invoice");
     InvoiceXMLMapper mapper = new InvoiceXMLMapper(xml);
+    System.out.println("show me the Contact object");
+    System.out.println(mapper.getContactXML());
     System.out.println("show me the Payment receipt address object");
     System.out.println(mapper.getAddressXML());
     System.out.println("show me the Company receipt address object");
@@ -31,13 +33,13 @@ public class App {
     System.out.println("**************************************************");
     System.out.println("");
     System.out.println("");
-
-
   }
 
   private static void invokePayReceipt(String xml) {
     System.out.println("Mappings for Payment receipt");
     PaymentReceiptXMLMapper mapper = new PaymentReceiptXMLMapper(xml);
+    System.out.println("show me the Contact object");
+    System.out.println(mapper.getContactXML());
     System.out.println("show me the Payment receipt address object");
     System.out.println(mapper.getAddressXML());
     System.out.println("show me the Company receipt address object");
