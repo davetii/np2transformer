@@ -30,6 +30,18 @@ public class App {
     System.out.println(mapper.getAddressXML());
     System.out.println("show me the Company receipt address object");
     System.out.println(mapper.getCompanyXML());
+    System.out.println("show me the invoice object");
+    System.out.println(mapper.getInvoiceXML());
+    System.out.println("show me the MRC object");
+    System.out.println(mapper.getMrcXML());
+    System.out.println("show me the NRC object");
+    System.out.println(mapper.getNrcXML());
+    System.out.println("show me the Cancellation object");
+    System.out.println(mapper.getCancelXML());
+    System.out.println("show me the Adjustments object");
+    System.out.println(mapper.getAdjustmentsXML());
+    System.out.println("show me the Payments object");
+    System.out.println(mapper.getPaymentsXML());
     System.out.println("**************************************************");
     System.out.println("");
     System.out.println("");
