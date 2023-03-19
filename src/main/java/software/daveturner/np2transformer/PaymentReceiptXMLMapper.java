@@ -10,10 +10,7 @@ public class PaymentReceiptXMLMapper extends NotificationXMLMapper {
 
     private final String paymentDetailXML;
     private final String ordersXml;
-
     private final String contactXML;
-
-
 
     public PaymentReceiptXMLMapper(String inputXML) {
         super(inputXML);

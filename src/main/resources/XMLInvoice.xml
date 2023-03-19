@@ -23,20 +23,23 @@
 				<IssueDate>2023-01-16</IssueDate>
 				<ReferenceNumber>OSINV102099372</ReferenceNumber>
 				<PreviousBalance>
-					<RawAmount CurrencyType="USD">0</RawAmount>
+					<RawAmount CurrencyType="USD">2</RawAmount>
 				</PreviousBalance>
 				<NetForBaseOnsServices>
 					<RawAmount CurrencyType="USD">34.99</RawAmount>
 				</NetForBaseOnsServices>
 				<NetForSupplOnsServices>
-					<RawAmount CurrencyType="USD">0</RawAmount>
+					<RawAmount CurrencyType="USD">2</RawAmount>
 				</NetForSupplOnsServices>
 				<TotalPayments>
 					<RawAmount CurrencyType="USD">34.99</RawAmount>
 				</TotalPayments>
 				<TotalAdjCanVoids>
-					<RawAmount CurrencyType="USD">0</RawAmount>
+					<RawAmount CurrencyType="USD">3</RawAmount>
 				</TotalAdjCanVoids>
+				<TotalTaxes>
+					<RawAmount CurrencyType="USD">7</RawAmount>
+				</TotalTaxes>
 				<AccountAmountDue>
 					<RawAmount CurrencyType="USD">34.99</RawAmount>
 				</AccountAmountDue>

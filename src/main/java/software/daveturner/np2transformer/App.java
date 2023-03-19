@@ -10,8 +10,8 @@ public class App {
   public static void main(String[] args)  {
 
     App app = new App();
-    String paymentReceiptXML = app.readXML("Payment-XMLReceipt.xml");
-    invokePayReceipt(paymentReceiptXML);
+    //String paymentReceiptXML = app.readXML("Payment-XMLReceipt.xml");
+    //invokePayReceipt(paymentReceiptXML);
 
     String invoiceXML = app.readXML("XMLInvoice.xml");
     invoiceInvoiceReceipt(invoiceXML);
@@ -32,6 +32,7 @@ public class App {
     System.out.println(mapper.getCompanyXML());
     System.out.println("show me the invoice object");
     System.out.println(mapper.getInvoiceXML());
+    /*
     System.out.println("show me the MRC object");
     System.out.println(mapper.getMrcXML());
     System.out.println("show me the NRC object");
@@ -42,6 +43,8 @@ public class App {
     System.out.println(mapper.getAdjustmentsXML());
     System.out.println("show me the Payments object");
     System.out.println(mapper.getPaymentsXML());
+
+     */
     System.out.println("**************************************************");
     System.out.println("");
     System.out.println("");
