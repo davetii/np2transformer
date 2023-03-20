@@ -99,7 +99,6 @@ public class InvoiceXMLMapper extends NotificationXMLMapper {
         NodeList results = sourceDoc.getElementsByTagName(sourceTagName);
         if(results == null) { return; }
 
-
         for(int i=0; i< results.getLength(); i++) {
             Node n = results.item(i);
             if(isElementNamed(n, sourceTagName)) {

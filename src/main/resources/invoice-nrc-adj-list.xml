@@ -1,0 +1,129 @@
+<XMLInvoice>
+	<Document>
+		<ContactDetails>
+			<GivenName>Louis Williams</GivenName>
+			<Language>1</Language>
+		</ContactDetails>
+		<AddressDetails>
+			<Line1>224 Rockingham</Line1>
+			<City>Toledo, US 43610</City>
+			<Country>US</Country>
+		</AddressDetails>
+		<CompanyAddress>
+			<Line1>OnStar Customer Care</Line1>
+			<Line2>P.O. Box 1027</Line2>
+			<Line3>Warren, MI 48090-1027</Line3>
+		</CompanyAddress>
+		<CustomerDetails>
+			<Contract>1</Contract>
+		</CustomerDetails>
+		<Invoice>
+			<InvoiceInfo>
+				<AccountNumber>172507693</AccountNumber>
+				<IssueDate>2022-03-11</IssueDate>
+				<ReferenceNumber>OSINV60539290</ReferenceNumber>
+				<PreviousBalance>
+					<RawAmount CurrencyType="USD">0</RawAmount>
+				</PreviousBalance>
+				<NetForBaseOnsServices>
+					<RawAmount CurrencyType="USD">255.94</RawAmount>
+				</NetForBaseOnsServices>
+				<NetForSupplOnsServices>
+					<RawAmount CurrencyType="USD">0</RawAmount>
+				</NetForSupplOnsServices>
+				<TotalPayments>
+					<RawAmount CurrencyType="USD">255.94</RawAmount>
+				</TotalPayments>
+				<TotalAdjCanVoids>
+					<RawAmount CurrencyType="USD">0</RawAmount>
+				</TotalAdjCanVoids>
+				<AccountAmountDue>
+					<RawAmount CurrencyType="USD">255.94</RawAmount>
+				</AccountAmountDue>
+			</InvoiceInfo>
+			<NRCDetails>
+				<VINDetails>
+					<VIN>1GCUYDED4MZ452161</VIN>
+					<OrderDetail>
+						<OrderId>335158250</OrderId>
+						<Charges>
+							<Detail>
+								<TransactionDate>2022-03-11</TransactionDate>
+								<InvoiceTxt>Essentials 1 Year Prepaid</InvoiceTxt>
+								<FromDate>2022-04-11</FromDate>
+								<ToDate>2023-04-10</ToDate>
+								<Amount>
+									<RawAmount CurrencyType="USD">399.90</RawAmount>
+								</Amount>
+							</Detail>
+							<Detail>
+								<TransactionDate>2022-03-11</TransactionDate>
+								<InvoiceTxt>Essentials Promotional Discount</InvoiceTxt>
+								<FromDate>2022-04-11</FromDate>
+								<ToDate>2023-04-10</ToDate>
+								<Amount>
+									<RawAmount CurrencyType="USD">-79.98</RawAmount>
+								</Amount>
+							</Detail>
+							<Detail>
+								<TransactionDate>2022-03-11</TransactionDate>
+								<InvoiceTxt>GM Family First Discount</InvoiceTxt>
+								<FromDate>2022-04-11</FromDate>
+								<ToDate>2023-04-10</ToDate>
+								<Amount>
+									<RawAmount CurrencyType="USD">-63.98</RawAmount>
+								</Amount>
+							</Detail>
+							<Detail>
+								<InvoiceTxt>Net Price</InvoiceTxt>
+								<Amount>
+									<RawAmount CurrencyType="USD">255.94</RawAmount>
+								</Amount>
+							</Detail>
+						</Charges>
+						<Taxes/>
+						<TotalTax>
+							<Amount>
+								<RawAmount CurrencyType="USD">0</RawAmount>
+							</Amount>
+						</TotalTax>
+						<OrderTotal>
+							<Amount>
+								<RawAmount CurrencyType="USD">255.94</RawAmount>
+							</Amount>
+						</OrderTotal>
+					</OrderDetail>
+					<VINTotal>
+						<Amount>
+							<RawAmount CurrencyType="USD">255.94</RawAmount>
+						</Amount>
+					</VINTotal>
+				</VINDetails>
+				<NRCTotal>
+					<Amount>
+						<RawAmount CurrencyType="USD">255.94</RawAmount>
+					</Amount>
+				</NRCTotal>
+			</NRCDetails>
+			<AdjustmentList>
+				<AdjustmentDetail>
+					<AdjustmentText>Customer Reimbursement - Order Cancellation per Diem</AdjustmentText>
+					<CurrencyAmount>
+						<RawAmount CurrencyType="USD">0</RawAmount>
+					</CurrencyAmount>
+				</AdjustmentDetail>
+			</AdjustmentList>
+			<PaymentList>
+				<PaymentDetail>
+					<TransactionDate>2022-03-11</TransactionDate>
+					<TransactionType>Visa - 9665</TransactionType>
+					<BillingReceiptNr>Payment</BillingReceiptNr>
+					<ReferenceNum>P-73381006</ReferenceNum>
+					<CurrencyAmount>
+						<RawAmount CurrencyType="USD">255.94</RawAmount>
+					</CurrencyAmount>
+				</PaymentDetail>
+			</PaymentList>
+		</Invoice>
+	</Document>
+</XMLInvoice>
