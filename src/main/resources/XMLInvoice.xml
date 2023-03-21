@@ -88,7 +88,22 @@
 					<RawAmount CurrencyType="USD">34.99</RawAmount>
 				</MRCTotal>
 			</MRCDetails>
-			<AdjustmentList/>
+			<AdjustmentList>
+				<AdjustmentDetail>
+					<AdjustmentText>Customer Reimbursement - Order Cancellation per Diem</AdjustmentText>
+					<CurrencyAmount>
+						<RawAmount CurrencyType="USD">-2</RawAmount>
+					</CurrencyAmount>
+				</AdjustmentDetail>
+				<AdjustmentDetail>
+					<AdjustmentText>Adjustment detail #2</AdjustmentText>
+					<AdjustmentNr>12345</AdjustmentNr>
+					<TransactionDate>transdate</TransactionDate>
+					<CurrencyAmount>
+						<RawAmount CurrencyType="USD">33</RawAmount>
+					</CurrencyAmount>
+				</AdjustmentDetail>
+			</AdjustmentList>
 			<PaymentList>
 				<PaymentDetail>
 					<TransactionDate>2023-01-17</TransactionDate>

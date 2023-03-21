@@ -69,14 +69,19 @@ public class NotificationXMLMapper {
         return docToString(doc);
     }
 
-    protected void maybeAddAttribute(Element order, Node child, String s) {
+    protected void maybeAddAttribute(Element e, Node child, String childNodeName, String toBeAttrib) {
+        if (isElementNamed(child, childNodeName)) {
+            addAttribute(e, toBeAttrib, child.getTextContent());
+        }
+    }
+    protected void maybeAddAttribute(Element e, Node child, String s) {
         if (isElementNamed(child, s)) {
-            addAttribute(order, s, child.getTextContent());
+            addAttribute(e, s, child.getTextContent());
         }
     }
 
-    protected void addAttribute(Element element, String key, String value) {
-        element.setAttribute( key, value );
+    protected void addAttribute(Element e, String key, String value) {
+        e.setAttribute( key, value );
     }
 
     protected Attr createAttribute(Document target, String key) {

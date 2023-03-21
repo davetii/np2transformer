@@ -30,6 +30,7 @@ public class InvoiceXMLMapper extends NotificationXMLMapper {
     private String buildAdjustmentsXML() {
         Document doc = newDoc();
         Element e = doc.createElement("Adjustments");
+        maybeAddAdjustments(doc, e);
         doc.appendChild(e);
         return docToString(doc);
     }
@@ -84,11 +85,49 @@ public class InvoiceXMLMapper extends NotificationXMLMapper {
         return docToString(doc);
     }
 
+    private void maybeAddAdjustments(Document doc, Element e) {
+        NodeList lists = sourceDoc.getElementsByTagName("AdjustmentList");
+        if(lists == null) { return; }
+        NodeList list = lists.item(0).getChildNodes();
+        for(int i=0; i< list.getLength(); i++) {
+            Node n = list.item(i);
+            if(n.getNodeType() !=  Node.ELEMENT_NODE) { continue; }
+            if(isElementNamed(n, "AdjustmentDetail")) {
+                Element adj = doc.createElement("Adjustment");
+                NodeList children = n.getChildNodes();
+                for(int x=0; x< children.getLength(); x++) {
+                    Node child = children.item(x);
+                    if(child.getNodeType() !=  Node.ELEMENT_NODE) { continue; }
+                    maybeAddAttribute(adj, child, "AdjustmentText", "AdjustTxt");
+                    maybeAddAttribute(adj, child, "AdjustmentNr", "AdjustNr");
+                    maybeAddAttribute(adj, child, "TransactionDate");
+                    adj.setTextContent(maybeAddCurrencyRaw(child));
+                    e.appendChild(adj);
+                }
+            }
+        }
+
+    }
+
+    private String maybeAddCurrencyRaw(Node node) {
+        if (node == null || node.getChildNodes().getLength() == 0) { return ""; }
+        NodeList list = node.getChildNodes();
+        for(int i=0; i< list.getLength(); i++) {
+            Node n = list.item(i);
+            if(n.getNodeType() !=  Node.ELEMENT_NODE) { continue; }
+            if(isElementNamed(n, "RawAmount")) {
+               return n.getTextContent();
+            }
+        }
+        return "";
+    }
+
     private void maybeAddAttribute(Element e, String nodeName) {
         NodeList results = sourceDoc.getElementsByTagName(nodeName);
         if(results == null) { return; }
         for(int i=0; i< results.getLength(); i++) {
             Node n = results.item(i);
+            if(n.getNodeType() !=  Node.ELEMENT_NODE) { continue; }
             if(isElementNamed(n, nodeName)) {
                 e.setAttribute(nodeName, n.getTextContent());
             }
@@ -101,10 +140,12 @@ public class InvoiceXMLMapper extends NotificationXMLMapper {
 
         for(int i=0; i< results.getLength(); i++) {
             Node n = results.item(i);
+            if(n.getNodeType() !=  Node.ELEMENT_NODE) { continue; }
             if(isElementNamed(n, sourceTagName)) {
                 NodeList children = results.item(0).getChildNodes();
                 for (int x = 0; x < children.getLength(); x++) {
                     Node item = children.item(x);
+                    if(item.getNodeType() !=  Node.ELEMENT_NODE) { continue; }
                     if(isElementNamed(item, "RawAmount")) {
                         e.setAttribute(newAtributeName, item.getTextContent());
                         break;
@@ -120,10 +161,12 @@ public class InvoiceXMLMapper extends NotificationXMLMapper {
 
         for(int i=0; i< results.getLength(); i++) {
             Node n = results.item(i);
+            if(n.getNodeType() !=  Node.ELEMENT_NODE) { continue; }
             if(isElementNamed(n, "NetForBaseOnsServices")) {
                 NodeList children = results.item(0).getChildNodes();
                 for (int x = 0; x < children.getLength(); x++) {
                     Node item = children.item(x);
+                    if(item.getNodeType() !=  Node.ELEMENT_NODE) { continue; }
                     if(isElementNamed(item, "RawAmount")) {
                         e.setAttribute("Currency", item.getAttributes().item(0).getTextContent());
                         break;
