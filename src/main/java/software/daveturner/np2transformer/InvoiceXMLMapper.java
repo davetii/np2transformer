@@ -73,10 +73,10 @@ public class InvoiceXMLMapper extends NotificationXMLMapper {
                 for(int x=0; x< children.getLength(); x++) {
                     Node child = children.item(x);
                     if(child.getNodeType() !=  Node.ELEMENT_NODE) { continue; }
-                    maybeAddAttribute(payment, child, "TransactionDate", "TransactionDate");
-                    maybeAddAttribute(payment, child, "TransactionType", "TransactionType");
-                    maybeAddAttribute(payment, child, "ReferenceNum", "ReferenceNum");
-                    maybeAddAttribute(payment, child, "BillingReceiptNr", "BillingReceiptNr");
+                    maybeAddAttribute(payment, child, "TransactionDate");
+                    maybeAddAttribute(payment, child, "TransactionType");
+                    maybeAddAttribute(payment, child, "ReferenceNum");
+                    maybeAddAttribute(payment, child, "BillingReceiptNr");
                     payment.setTextContent(maybeAddCurrencyRaw(child));
                     e.appendChild(payment);
                 }
