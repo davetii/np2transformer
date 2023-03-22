@@ -114,6 +114,15 @@
 						<RawAmount CurrencyType="USD">34.99</RawAmount>
 					</CurrencyAmount>
 				</PaymentDetail>
+				<PaymentDetail>
+					<TransactionDate>2022-01-17</TransactionDate>
+					<TransactionType>Visa - 1699</TransactionType>
+					<BillingReceiptNr>Payment</BillingReceiptNr>
+					<ReferenceNum>P-132987877</ReferenceNum>
+					<CurrencyAmount>
+						<RawAmount CurrencyType="USD">55.55</RawAmount>
+					</CurrencyAmount>
+				</PaymentDetail>
 			</PaymentList>
 		</Invoice>
 	</Document>

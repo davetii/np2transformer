@@ -28,16 +28,61 @@ public class InvoiceXMLMapper extends NotificationXMLMapper {
     }
 
     private String buildAdjustmentsXML() {
+        NodeList lists = sourceDoc.getElementsByTagName("AdjustmentList");
+        if(lists == null) { return ""; }
+
         Document doc = newDoc();
         Element e = doc.createElement("Adjustments");
-        maybeAddAdjustments(doc, e);
+
+        NodeList list = lists.item(0).getChildNodes();
+        for(int i=0; i< list.getLength(); i++) {
+            Node n = list.item(i);
+            if(n.getNodeType() !=  Node.ELEMENT_NODE) { continue; }
+            if(isElementNamed(n, "AdjustmentDetail")) {
+                Element adj = doc.createElement("Adjustment");
+                NodeList children = n.getChildNodes();
+                for(int x=0; x< children.getLength(); x++) {
+                    Node child = children.item(x);
+                    if(child.getNodeType() !=  Node.ELEMENT_NODE) { continue; }
+                    maybeAddAttribute(adj, child, "AdjustmentText", "AdjustTxt");
+                    maybeAddAttribute(adj, child, "AdjustmentNr", "AdjustNr");
+                    maybeAddAttribute(adj, child, "TransactionDate");
+                    adj.setTextContent(maybeAddCurrencyRaw(child));
+                    e.appendChild(adj);
+                }
+            }
+        }
         doc.appendChild(e);
         return docToString(doc);
     }
 
     private String buildPaymentsXML() {
+        NodeList lists = sourceDoc.getElementsByTagName("PaymentList");
+        if(lists == null) { return ""; }
+
         Document doc = newDoc();
         Element e = doc.createElement("Payments");
+
+        NodeList list = lists.item(0).getChildNodes();
+        for(int i=0; i< list.getLength(); i++) {
+            Node n = list.item(i);
+            if(n.getNodeType() !=  Node.ELEMENT_NODE) { continue; }
+            if(isElementNamed(n, "PaymentDetail")) {
+                Element payment = doc.createElement("Payment");
+                NodeList children = n.getChildNodes();
+                for(int x=0; x< children.getLength(); x++) {
+                    Node child = children.item(x);
+                    if(child.getNodeType() !=  Node.ELEMENT_NODE) { continue; }
+                    maybeAddAttribute(payment, child, "TransactionDate", "TransactionDate");
+                    maybeAddAttribute(payment, child, "TransactionType", "TransactionType");
+                    maybeAddAttribute(payment, child, "ReferenceNum", "ReferenceNum");
+                    maybeAddAttribute(payment, child, "BillingReceiptNr", "BillingReceiptNr");
+                    payment.setTextContent(maybeAddCurrencyRaw(child));
+                    e.appendChild(payment);
+                }
+            }
+        }
+
         doc.appendChild(e);
         return docToString(doc);
     }
@@ -83,30 +128,6 @@ public class InvoiceXMLMapper extends NotificationXMLMapper {
         maybeAddCurrency(e);
         doc.appendChild(e);
         return docToString(doc);
-    }
-
-    private void maybeAddAdjustments(Document doc, Element e) {
-        NodeList lists = sourceDoc.getElementsByTagName("AdjustmentList");
-        if(lists == null) { return; }
-        NodeList list = lists.item(0).getChildNodes();
-        for(int i=0; i< list.getLength(); i++) {
-            Node n = list.item(i);
-            if(n.getNodeType() !=  Node.ELEMENT_NODE) { continue; }
-            if(isElementNamed(n, "AdjustmentDetail")) {
-                Element adj = doc.createElement("Adjustment");
-                NodeList children = n.getChildNodes();
-                for(int x=0; x< children.getLength(); x++) {
-                    Node child = children.item(x);
-                    if(child.getNodeType() !=  Node.ELEMENT_NODE) { continue; }
-                    maybeAddAttribute(adj, child, "AdjustmentText", "AdjustTxt");
-                    maybeAddAttribute(adj, child, "AdjustmentNr", "AdjustNr");
-                    maybeAddAttribute(adj, child, "TransactionDate");
-                    adj.setTextContent(maybeAddCurrencyRaw(child));
-                    e.appendChild(adj);
-                }
-            }
-        }
-
     }
 
     private String maybeAddCurrencyRaw(Node node) {
