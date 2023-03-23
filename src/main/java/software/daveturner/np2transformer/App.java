@@ -36,18 +36,15 @@ public class App {
     System.out.println(mapper.getAdjustmentsXML());
     System.out.println("show me the Payments object");
     System.out.println(mapper.getPaymentsXML());
-    /*
+
     System.out.println("show me the MRC object");
     System.out.println(mapper.getMrcXML());
+
     System.out.println("show me the NRC object");
     System.out.println(mapper.getNrcXML());
     System.out.println("show me the Cancellation object");
     System.out.println(mapper.getCancelXML());
-    System.out.println("show me the Adjustments object");
-    System.out.println(mapper.getAdjustmentsXML());
 
-
-     */
     System.out.println("**************************************************");
     System.out.println("");
     System.out.println("");

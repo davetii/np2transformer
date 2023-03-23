@@ -26,7 +26,7 @@
 					<RawAmount CurrencyType="USD">2</RawAmount>
 				</PreviousBalance>
 				<NetForBaseOnsServices>
-					<RawAmount CurrencyType="USD">34.99</RawAmount>
+					<RawAmount CurrencyType="USD">32.99</RawAmount>
 				</NetForBaseOnsServices>
 				<NetForSupplOnsServices>
 					<RawAmount CurrencyType="USD">2</RawAmount>
@@ -66,7 +66,14 @@
 								</Amount>
 							</Detail>
 						</Charges>
-						<Taxes/>
+						<Taxes>
+							<Detail>
+								<Label>Bob the Tax</Label>
+								<Amount>
+									<RawAmount CurrencyType="USD">412.90</RawAmount>
+								</Amount>
+							</Detail>
+						</Taxes>
 						<TotalTax>
 							<Amount>
 								<RawAmount CurrencyType="USD">0</RawAmount>
@@ -88,6 +95,77 @@
 					<RawAmount CurrencyType="USD">34.99</RawAmount>
 				</MRCTotal>
 			</MRCDetails>
+			<NRCDetails>
+				<VINDetails>
+					<VIN>1GCUYDED4MZ452161</VIN>
+					<OrderDetail>
+						<OrderId>335158250</OrderId>
+						<Charges>
+							<Detail>
+								<TransactionDate>2022-03-11</TransactionDate>
+								<InvoiceTxt>Essentials 1 Year Prepaid</InvoiceTxt>
+								<FromDate>2022-04-11</FromDate>
+								<ToDate>2023-04-10</ToDate>
+								<Amount>
+									<RawAmount CurrencyType="USD">399.90</RawAmount>
+								</Amount>
+							</Detail>
+							<Detail>
+								<TransactionDate>2022-03-11</TransactionDate>
+								<InvoiceTxt>Essentials Promotional Discount</InvoiceTxt>
+								<FromDate>2022-04-11</FromDate>
+								<ToDate>2023-04-10</ToDate>
+								<Amount>
+									<RawAmount CurrencyType="USD">-79.98</RawAmount>
+								</Amount>
+							</Detail>
+							<Detail>
+								<TransactionDate>2022-03-11</TransactionDate>
+								<InvoiceTxt>GM Family First Discount</InvoiceTxt>
+								<FromDate>2022-04-11</FromDate>
+								<ToDate>2023-04-10</ToDate>
+								<Amount>
+									<RawAmount CurrencyType="USD">-63.98</RawAmount>
+								</Amount>
+							</Detail>
+							<Detail>
+								<InvoiceTxt>Net Price</InvoiceTxt>
+								<Amount>
+									<RawAmount CurrencyType="USD">255.94</RawAmount>
+								</Amount>
+							</Detail>
+						</Charges>
+						<Taxes>
+							<Detail>
+								<Label>NRC TAX</Label>
+								<Amount>
+									<RawAmount CurrencyType="USD">412.90</RawAmount>
+								</Amount>
+							</Detail>
+						</Taxes>
+						<TotalTax>
+							<Amount>
+								<RawAmount CurrencyType="USD">0</RawAmount>
+							</Amount>
+						</TotalTax>
+						<OrderTotal>
+							<Amount>
+								<RawAmount CurrencyType="USD">255.94</RawAmount>
+							</Amount>
+						</OrderTotal>
+					</OrderDetail>
+					<VINTotal>
+						<Amount>
+							<RawAmount CurrencyType="USD">255.94</RawAmount>
+						</Amount>
+					</VINTotal>
+				</VINDetails>
+				<NRCTotal>
+					<Amount>
+						<RawAmount CurrencyType="USD">255.94</RawAmount>
+					</Amount>
+				</NRCTotal>
+			</NRCDetails>
 			<AdjustmentList>
 				<AdjustmentDetail>
 					<AdjustmentText>Customer Reimbursement - Order Cancellation per Diem</AdjustmentText>
