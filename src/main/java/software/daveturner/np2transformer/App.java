@@ -10,8 +10,8 @@ public class App {
   public static void main(String[] args)  {
 
     App app = new App();
-    //String paymentReceiptXML = app.readXML("Payment-XMLReceipt.xml");
-    //invokePayReceipt(paymentReceiptXML);
+    String paymentReceiptXML = app.readXML("Payment-XMLReceipt.xml");
+    invokePayReceipt(paymentReceiptXML);
 
     String invoiceXML = app.readXML("XMLInvoice.xml");
     invoiceInvoiceReceipt(invoiceXML);
